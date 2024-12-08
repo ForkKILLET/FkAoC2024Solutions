@@ -4,7 +4,7 @@ input('3')
 	|> await
 	|> matchAll(/mul\((\d+),(\d+)\)|do\(\)|don't\(\)/g)
 	|> toArray
-	|> reduce
+	|> fold
 		(([ a, f ], [ s, l, r ]) => {
 			if (s[2] === '(') f = true
 			else if (s[2] === 'n') f = false

@@ -8,7 +8,7 @@ const [ rulesInput, updatesInput ] = input('5')
 const rules = rulesInput
 	|> split('\n')
 	|> map(split('|'))
-	|> reduce((p, [ x, y ]) => ((p[x] ??= []).push(y), p))({})
+	|> foldWith((p, [ x, y ]) => (p[x] ??= []).push(y))({})
 
 updatesInput
 	|> split('\n')
