@@ -27,5 +27,5 @@ updatesInput
 	))
 	|> map(update => update[ update |> len |> sub(1) |> div(2) ] |> Number)
 	|> sum
-	|> runLog
+	|> toLog
 

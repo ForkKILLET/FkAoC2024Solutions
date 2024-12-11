@@ -13,5 +13,5 @@ input('1')
 	|> zip
 	|> map(([ x, y ]) => x - y |> abs)
 	|> sum
-	|> runLog
+	|> toLog
 

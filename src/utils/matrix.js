@@ -14,11 +14,11 @@ export const matToStr = mat => mat
 	|> map(join(''))
 	|> join('\n')
 
-export const matSize = mat => [ mat[0] |> len, mat |> len ]
+export const matSize = mat => [ mat |> len, mat[0] |> len ]
 export const matRow = len
 export const matCol = mat => mat[0] |> len
 export const matIter = function* (mat) {
-	const [ col, row ] = mat |> matSize
+	const [ row, col ] = mat |> matSize
 	let i = 0, j = 0
 	while (true) {
 		yield [ mat[i][j], [ i, j ] ]
@@ -34,3 +34,9 @@ export const coordOf = x => mat => mat
 	|> find(i => i |> at(0) |> eq(x))
 	|> maybe(at(1))
 export const coordIn = flip(coordOf)
+
+export const neighborOf = ([ i, j ]) => [ [ i + 1, j ], [ i, j - 1 ], [ i - 1, j ], [ i, j + 1 ] ]
+
+export const inMat = mat => ([ i, j ]) => and
+	(i |> between(0, mat |> matRow |> sub(1)))
+	(j |> between(0, mat |> matCol |> sub(1)))

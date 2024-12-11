@@ -11,7 +11,8 @@ input('7')
 			r |> split(' ') |> map(Number),
 		]
 	)
-	|> filter(([ l, r ]) => iterN(1 << (r |> len |> sub(1)))
+	// |> filter(([ l, r ]) => iterN(1 << (r |> len |> sub(1)))
+	|> filter(([ l, r ]) => iterN(1 << r |> len |> sub(1))
 		|> some(b => r
 			|> fold1((a, c, i) => b && (1 << i) ? a + c : a * c)
 			|> eq(l)
@@ -19,4 +20,4 @@ input('7')
 	)
 	|> map(at(0))
 	|> sum
-	|> runLog
+	|> toLog

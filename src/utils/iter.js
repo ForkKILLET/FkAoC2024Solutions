@@ -1,4 +1,4 @@
-export const iter = function* (g, x) {
+export const iter = g => function* (x) {
 	while (true) {
 		yield x
 		x = g(x)
@@ -15,7 +15,9 @@ export const iterN = function* (n) {
 	while (i < n) yield i ++
 }
 
-export const toArray = it => it.toArray()
+export const toArr = it => it.toArray()
 
 export const take = x => it => it.take(x)
 export const drop = x => it => it.drop(x)
+export const iterVal = it => it.next().value
+export const iterAt = n => it => it |> drop(n - 1) |> iterVal

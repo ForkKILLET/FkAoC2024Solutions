@@ -11,7 +11,7 @@ const resMat = matMN(size)(size)
 
 const dirs = [ [ 1, 0 ], [ 0, 1 ], [ 1, 1 ], [ 1, - 1 ] ]
 const words = [ id, reverse ] |> map(pipe('XMAS'))
-const dirsXwords = dirProd(dirs, words)
+const dirsXwords = dirProd(dirs)(words)
 const judge = (i, j, [ di, dj ], w, l, k) =>
 	mat[i][j] === w[k]
 		&& (k === l - 1
@@ -27,11 +27,11 @@ mat
 	)
 	|> flat(3)
 	|> sum
-	|> runLog
+	|> toLog
 
 const color = s => `\x1B[32m${s}\x1B[0m`
 resMat
 	|> mapMat((res, [ i, j ]) => mat[i][j] |> (res ? color : id))
 	|> matToStr
-	|> runLog
+	|> toLog
 

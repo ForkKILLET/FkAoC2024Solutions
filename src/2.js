@@ -24,4 +24,4 @@ input('2')
 		)
 	)
 	|> len
-	|> runLog
+	|> toLog

@@ -13,4 +13,4 @@ input('3')
 		})
 		([ 0, true ])
 	|> at(0)
-	|> runLog
+	|> toLog

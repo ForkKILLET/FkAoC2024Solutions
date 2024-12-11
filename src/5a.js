@@ -20,4 +20,4 @@ updatesInput
 	|> filter(update => rules |> every(checkRule(update)))
 	|> map(update => update[ update |> len |> sub(1) |> div(2) ] |> Number)
 	|> sum
-	|> runLog
+	|> toLog

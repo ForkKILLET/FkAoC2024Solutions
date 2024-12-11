@@ -14,4 +14,4 @@ input('1')
 		|> map(x => x * (ys |> filter(eq(x)) |> len))
 		|> sum
 	)
-	|> runLog
+	|> toLog

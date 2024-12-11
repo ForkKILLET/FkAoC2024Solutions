@@ -16,4 +16,4 @@ matMN(size - 2)(size - 2)
 	|> mapMat((_, [ i, j ]) => judge(i + 1, j + 1, [...'MAS']))
 	|> flat(3)
 	|> sum
-	|> runLog
+	|> toLog

@@ -6,7 +6,7 @@ const map = input('6')
 
 const start = map |> coordOf('^')
 
-const [ col, row ] = map |> matSize
+const [ row, col ] = map |> matSize
 
 const visited = map |> mapMat(() => [])
 
@@ -26,4 +26,4 @@ iter(([ done, [ i, j ], [ di, dj ] ]) => {
 	return [ false, [ ni, nj ], [ di, dj ] ]
 }, [ false, start, [ - 1, 0 ] ]) |> find(at(0))
 
-map |> flat() |> filter(eq('*')) |> len |> runLog
+map |> flat() |> filter(eq('*')) |> len |> toLog

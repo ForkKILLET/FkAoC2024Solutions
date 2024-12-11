@@ -1,4 +1,4 @@
-import { uncurry } from './function.js'
+import { uncurry, id } from './function.js'
 import { add, eq } from './math.js'
 
 export const len = xs => xs.length
@@ -17,7 +17,7 @@ export const sum = xs => xs |> foldM(add)
 
 export const arrN = n => Array.from({ length: n })
 export const rangeN = n => n |> arrN |> map((_, i) => i)
-export const dirProd = (xs, ys) => xs |> flatMap(x => ys |> map(y => [ x, y ]))
+export const dirProd = xs => ys => xs |> flatMap(x => ys |> map(y => [ x, y ]))
 
 export const join = d => xs => xs.join(d)
 
@@ -33,10 +33,28 @@ export const same = xs => ys => (xs |> every(elem(ys))) && (ys |> every(elem(xs)
 export const arrEq = xs => ys => eq(xs |> len)(ys |> len)
 	&& (xs |> every((x, i) => eq(x)(ys[i])))
 
+export const uniqBy = eq => xs => xs |> filter((x, i) => xs
+	|> slice(i + 1)
+	|> some(eq(x))
+	|> not
+)
+export const uniqOn = tr => uniqBy(x => y => eq(x |> tr)(y |> tr))
+export const uniq = uniqBy(eq)
+
 export const sort = cmp => xs => xs.sort(cmp)
 export const toSorted = cmp => xs => xs.toSorted(cmp)
+
+export const pushTo = xs => x => xs.push(x)
 
 export const zip = ([ xs, ys ]) => xs |> map((x, i) => [ x, ys[i] ])
 export const unzip = xys => xys |> reduceOn
 	((xsys, [ x, y ]) => { xsys[0].push(x); xsys[1].push(y) })
 	([ [], [] ])
+
+export const groupMapOn = tag => tr => foldWith
+	((d, x) => x |> tr |> pushTo(d[x |> tag] ??= []))
+	({})
+export const groupOn = tag => groupMapOn(tag)(id)
+export const count = xs => xs
+	|> groupOn(id)
+	|> mapObj(len)

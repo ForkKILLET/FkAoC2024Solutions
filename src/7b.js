@@ -26,4 +26,4 @@ input('7')
 	})
 	|> map(at(0))
 	|> sum
-	|> runLog
+	|> toLog
